@@ -1,0 +1,106 @@
+{% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+    <style>
+      /* Estilos adicionales */
+      .patient-info-container {
+        background-color: #f8fafc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .patient-info-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1d4ed8;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #1d4ed8;
+        padding-bottom: 5px;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        font-size: 1rem;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #374151;
+      }
+
+      .info-value {
+        color: #1f2937;
+        font-weight: 500;
+        margin-left: 5px;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid #e5e7eb;
+        padding: 10px 0;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gray-100">
+    <h1 class="text-3xl font-semibold text-blue-700 text-center">{{title}}</h1>
+    <div class="container mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
+      <h1 class="text-3xl font-semibold text-blue-700">
+        Bienvenido al Paciente {{ persona.apellidoPaterno }}
+        {{persona.apellidoMaterno }} {{ persona.nombres }}
+      </h1>
+
+      <div class="patient-info-container">
+        <h2 class="patient-info-title">Datos del paciente</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Número Documento:</span>
+            <span class="info-value">{{ persona.numeroDocumento }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Dirección:</span>
+            <span class="info-value">{{ persona.direccion }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Estado Civil:</span>
+            <span class="info-value">{{ persona.estadoCivil }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Sexo:</span>
+            <span class="info-value">{{ persona.sexo }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Fecha Nacimiento:</span>
+            <span class="info-value"
+              >{{ persona.fechaNacimiento|default:"No disponible" }}</span
+            >
+          </div>
+          <div class="info-item">
+            <span class="info-label">Historia Clínica:</span>
+            <span class="info-value">{{ persona.historiaClinica }}</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Autogenerado:</span>
+            <span class="info-value">{{ persona.autogenerado }}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Centro:</span>
+            <span class="info-value">{{ persona.centro }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}

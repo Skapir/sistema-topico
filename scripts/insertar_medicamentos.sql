@@ -1,0 +1,11 @@
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('DICLOFENACO', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('ORFENADRINA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('INSU 20UI', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('DEXAMETASONA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('CLORFENAMINA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('PENICILINA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('METAMIZOL', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('B12', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('AMIKACINA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('GENTAMICINA', 'AM');
+INSERT INTO topico_medicamentos (descripcion, unidad_medida) VALUES ('EPOET', 'AM');

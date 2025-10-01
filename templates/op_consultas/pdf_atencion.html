@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atención del Paciente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        p, li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #007bff;
+        }
+        ul {
+            margin: 0;
+            padding: 0 20px;
+        }
+        li {
+            list-style-type: disc;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div >
+            <h1 style="text-align: center; color: #007bff; font-size: 24px; margin-bottom: 15px;">ATENCIÓN DEL PACIENTE</h1>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <tbody>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">PACIENTE:</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.paciente.HI_NOMBRE }}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">DNI:</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.paciente.HI_NDOCUM }}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">DIRECCIÓN:</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.paciente.HI_DIRECC }}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">HISTORIA CLÍNICA:</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.paciente.HI_NREG }}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">AUTOGENERADO:</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.paciente.HI_AUTASE }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Responsable -->
+        <div style="margin-top: 15px;">
+            <p class="section-title" style="color: #007bff">Responsable</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                <tbody>
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">Profesional</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">
+                            {% if atencion.personal %}
+                                    {{ atencion.personal.username }}
+                                {% else %}
+                                    No asignado
+                            {% endif %}
+                        </td>
+                    </tr>           
+                    <tr>
+                        <td style="background-color: #f4f4f4;padding: 10px; border: 1px solid #ddd; font-weight: bold;">Fecha de Atención</td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.get_fecha }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                
+
+        {% if atencion.tipo_procedimiento %}
+            <div style="margin-top: 15px;">
+                <p class="section-title" style="color: #007bff">Tipo de Procedimiento:</p>
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 10px; border: 1px solid #ddd;">{{ atencion.tipo_procedimiento.descripcion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+        
+        <!-- Mostrar detalle según el tipo de procedimiento -->
+        {% if atencion.tipo_procedimiento.descripcion == "PROCEDIMIENTOS GENERALES" %}
+            {% if atencion.get_general_details %}
+                <div>
+                    <p class="section-title" style="color: #007bff">Detalle del Procedimiento Generales:</p>
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <tbody>
+                            {% for key, value in atencion.get_general_details.items %}
+                            <tr style="border: 1px solid #ddd;">
+                                <td style="background-color: #f4f4f4; font-weight: bold; padding: 10px; border: 1px solid #ddd;">{{ key }}</td>
+                                <td style="padding: 10px; border: 1px solid #ddd;">{{ value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+
+        {% elif atencion.tipo_procedimiento.descripcion == "PROCEDIMIENTOS ESPECIFICOS" %}
+            {% if atencion.get_especifico_details %}
+                <div style="margin-top: 15px;">
+                    <p class="section-title" style="color: #007bff">Detalle del Procedimiento Específicos:</p>
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_especifico_details.items %}
+                                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_especifico_details.items %}
+                                    <td style="padding: 10px; border: 1px solid #ddd;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+
+
+            <!-- MEDICAMENTOS -->
+            {% if medicamentos %}
+            <p class="section-title" style="color: #007bff">Medicamentos Asociados:</p>
+                <div style="margin-top: 15px;">
+                    
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Unidad de Medida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for medicamento in medicamentos %}
+                            <tr style="border: 1px solid #ddd;">
+                                <td style="padding: 5px; border: 1px solid #ddd;">{{ medicamento.medicamentos.descripcion }}</td>
+                                <td style="padding: 5px; border: 1px solid #ddd;">{{ medicamento.medicamentos.unidad_medida }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+
+            <!-- MATERIALES -->
+            {% if materiales %}
+            <p class="section-title" style="color: #007bff">Materiales Asociados:</p>
+            <div style="margin-top: 15px;">
+
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in materiales %}
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.materiales_insumos.descripcion }}</td>
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.cantidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+        {% elif atencion.tipo_procedimiento.descripcion == "PROCEDIMIENTOS ESPECIALES" %}
+            {% if atencion.get_especial_details %}
+                <p class="section-title" style="color: #007bff">Detalle del Procedimiento Especiales:</p>
+                <div style="margin-top: 15px;">
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_especial_details.items %}
+                                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_especial_details.items %}
+                                    <td style="padding: 10px; border: 1px solid #ddd;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+
+            <!-- MATERIALES -->
+            {% if materiales %}
+            <p class="section-title" style="color: #007bff">Materiales Asociados:</p>
+            <div style="margin-top: 15px;">
+
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in materiales %}
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.materiales_insumos.descripcion }}</td>
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.cantidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+        {% elif atencion.tipo_procedimiento.descripcion == "PROCEDIMIENTOS MEDICOS" %}
+            {% if atencion.get_medico_details %}
+                <p class="section-title" style="color: #007bff">Detalle del Procedimiento Médicos:</p>
+                <div style="margin-top: 15px;">
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_medico_details.items %}
+                                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_medico_details.items %}
+                                    <td style="padding: 10px; border: 1px solid #ddd;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+
+             <!-- MATERIALES -->
+            {% if materiales %}
+            <p class="section-title" style="color: #007bff">Materiales Asociados:</p>
+            <div style="margin-top: 15px;">
+
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in materiales %}
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.materiales_insumos.descripcion }}</td>
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.cantidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            
+        {% elif atencion.tipo_procedimiento.descripcion == "CURACION HERIDAS" %}
+            {% if atencion.get_curacion_details %}
+                <p class="section-title" style="color: #007bff">Detalle del Procedimiento Curaciones:</p>
+                <div style="margin-top: 15px;">
+                    <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                        <thead>
+                            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_curacion_details.items %}
+                                    <th style="padding: 10px; border: 1px solid #ddd; font-weight: bold;">{{ key }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border: 1px solid #ddd;">
+                                {% for key, value in atencion.get_curacion_details.items %}
+                                    <td style="padding: 10px; border: 1px solid #ddd;">{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            <!-- DIAGNOSTICO -->
+            {% if diagnostico %}
+            <p class="section-title" style="color: #007bff">Diagnostico:</p>
+            <div style="margin-top: 15px;">
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in diagnostico %}
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ d.diagnostico_medico.descripcion }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+
+            <!-- MATERIALES -->
+            {% if materiales %}
+            <p class="section-title" style="color: #007bff">Materiales Asociados:</p>
+            <div style="margin-top: 15px;">
+
+                <table style="margin: 0 auto; border-collapse: collapse; width: 80%; text-align: center;">
+                    <thead>
+                        <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                            <th style="padding: 10px; border: 1px solid #ddd;">Descripción</th>
+                            <th style="padding: 10px; border: 1px solid #ddd;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for m in materiales %}
+                        <tr style="border: 1px solid #ddd;">
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.materiales_insumos.descripcion }}</td>
+                            <td style="padding: 5px; border: 1px solid #ddd;">{{ m.cantidad }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+        {% endif %}
+    </div>
+</body>
+</html>

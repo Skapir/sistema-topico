@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Procedimientos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .header, .footer {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #555;
+        }
+        .footer {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Reporte de Procedimientos</h1>
+        <p>Generado el: {{ fecha_actual }}</p>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Paciente</th>
+                <th>Tipo de Procedimiento</th>
+                <th>Responsable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for procedimiento in procedimientos %}
+            <tr>
+                <td>{{ procedimiento.fecha_registro }}</td>
+                <td>{{ procedimiento.paciente.HI_NOMBRE }}</td>
+                <td>{{ procedimiento.tipo_procedimiento.descripcion }}</td>
+                <td>{{ procedimiento.personal.username }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="footer">
+        <p>Este reporte fue generado automáticamente por el sistema.</p>
+    </div>
+</body>
+</html>

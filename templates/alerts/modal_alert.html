@@ -1,0 +1,48 @@
+<div
+  id="modal-alerta"
+  class="fixed inset-0 bg-gray-800 bg-opacity-75 items-center justify-center hidden"
+>
+  <div class="bg-white rounded-lg shadow-lg p-6 max-w-lg">
+    <div class="flex items-start">
+      <div class="flex-shrink-0">
+        <svg
+          class="h-6 w-6 text-red-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M18.364 5.636a9 9 0 11-12.728 12.728 9 9 0 0112.728-12.728z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01"
+          />
+        </svg>
+      </div>
+      <div class="ml-4">
+        <h2 class="text-lg font-semibold text-gray-900">
+          Seleccione un Tipo de Procedimiento
+        </h2>
+        <p class="mt-2 text-sm text-gray-600">
+          Por favor, asegúrese de seleccionar un tipo de procedimiento antes de
+          continuar.
+        </p>
+      </div>
+    </div>
+    <div class="mt-6 flex justify-end space-x-3">
+      <button
+        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        onclick="cerrarModal()"
+      >
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>

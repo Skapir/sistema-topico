@@ -1,0 +1,10 @@
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('ULC. VARIC.');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('PIE DIAB.');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('ULCERA X PRESION.');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('ABSCESO');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('QUEMAD');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('HERIDA QX.');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('LACERACION');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('CONTUSION');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('CORTE');
+INSERT INTO topico_diagnosticomedico (descripcion) VALUES ('OTRO');

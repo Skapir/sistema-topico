@@ -1,0 +1,153 @@
+<div
+  id="modal-actualizar-material"
+  style="
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  "
+>
+  <div
+    style="
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    "
+  >
+    <div class="flex justify-between items-center border-b pb-4 mb-4">
+      <h2 class="text-lg font-semibold text-blue-700">Editar Material</h2>
+      <button
+        type="button"
+        onclick="cerrarModal()"
+        class="text-gray-500 hover:text-gray-800 focus:outline-none"
+        style="
+          font-size: 20px;
+          line-height: 1;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        "
+      >
+        &times;
+      </button>
+    </div>
+
+    <form id="form-actualizar-material" method="POST" action="">
+      {% csrf_token %}
+      <input type="hidden" id="material_id_editar" name="material_id_editar" />
+      <div class="grid gap-4">
+        <!-- Descripción -->
+        <div>
+          <label
+            for="descripcion_editar"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Descripción *
+          </label>
+          <input
+            type="text"
+            id="descripcion_editar"
+            name="descripcion_editar"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+        <!-- Unidad de Medida -->
+        <div>
+          <label
+            for="unidad_medida_editar"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Unidad de Medida *
+          </label>
+          <select
+            id="unidad_medida_editar"
+            name="unidad_medida_editar"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            required
+          >
+            <option value="" disabled selected>Seleccione</option>
+            <option value="UN">UN</option>
+            <option value="KG">KG</option>
+            <option value="LT">LT</option>
+          </select>
+        </div>
+        <!-- Fecha de Vencimiento -->
+        <div>
+          <label
+            for="fecha_vencimiento_editar"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Fecha de Vencimiento
+          </label>
+          <input
+            type="date"
+            id="fecha_vencimiento_editar"
+            name="fecha_vencimiento_editar"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <!-- Stock Actual 
+        <div>
+          <label
+            for="stock_actual_editar"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Stock Actual
+          </label>
+          <input
+            type="number"
+            id="stock_actual_editar"
+            name="stock_actual_editar"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            min="0"
+            required
+          />
+        </div> -->
+
+        <!-- Stock Mínimo -->
+        <div>
+          <label
+            for="stock_minimo_editar"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Stock Mínimo
+          </label>
+          <input
+            type="number"
+            id="stock_minimo_editar"
+            name="stock_minimo_editar"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            min="0"
+          />
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button
+          type="button"
+          onclick="cerrarModal()"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg mr-4 hover:bg-gray-300"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

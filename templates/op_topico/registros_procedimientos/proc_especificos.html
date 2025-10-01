@@ -1,0 +1,159 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title }}</title>
+    <!-- Tailwind CSS desde archivo local -->
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+  </head>
+
+  <body
+    class="bg-gray-100"
+    data-show-modal-exito="{% if messages %}{% for message in messages %}{% if message.tags == 'success' %}true{% endif %}{% endfor %}{% else %}false{% endif %}"
+  >
+    {% include "op_topico/r_procedimientos.html" %}
+    <!-- Formulario para guardar los datos -->
+    <form method="POST" action="{% url 'r_procedimientos_especificos' %}">
+      {% csrf_token %}
+      <input type="hidden" id="descripcion-procedimiento" name="descripcion" />
+      <div id="contenedor-inputs-medicamentos">
+        <!-- Los inputs de medicamentos se agregarán dinámicamente -->
+      </div>
+
+      <div id="contenedor-inputs-materiales">
+        <!-- Los inputs de materiales y cantidades se agregarán dinámicamente -->
+      </div>
+
+      <!-- Tipo de Procedimiento -->
+      <div class="container mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
+        <div class="border border-gray-300 rounded-md p-4 mb-6">
+          <h1 class="text-2xl font-bold text-blue-700 mb-4">
+            Tipo de Procedimiento
+          </h1>
+          <div class="flex justify-start mb-4">
+            <button
+              id="boton-nuevo"
+              onclick="mostrarModal('tipo-procedimiento')"
+              type="button"
+              class="fa fa-plus-circle bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-500 transition-colors duration-300"
+            >
+              Nuevo
+            </button>
+          </div>
+          <!-- Tabla de tipo de procedimiento -->
+          <table
+            id="tabla-tipo-procedimiento"
+            class="min-w-full bg-white border border-gray-200"
+          >
+            <thead>
+              <tr class="bg-gray-100 border-b">
+                <th class="py-2 px-4 border-r">#</th>
+                <th class="py-2 px-4 border-r">Tipo de Procedimiento</th>
+                <th class="py-2 px-4 border-r">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Las filas dinámicas se agregarán aquí -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Medicamentos -->
+        <div class="border border-gray-300 rounded-md p-4 mb-6">
+          <h1 class="text-2xl font-bold text-blue-700 mb-4">Medicamentos</h1>
+          <div class="flex justify-start mb-4">
+            <button
+              id="boton-nuevo-medicamentos"
+              onclick="mostrarModal('medicamentos')"
+              type="button"
+              class="fa fa-plus-circle bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-500 transition-colors duration-300"
+            >
+              Nuevo
+            </button>
+          </div>
+          <!-- Tabla de medicamentos -->
+          <table
+            id="tabla-medicamento"
+            class="min-w-full bg-white border border-gray-200"
+          >
+            <thead>
+              <tr class="bg-gray-100 border-b">
+                <th class="py-2 px-4 border-r">#</th>
+                <th class="py-2 px-4 border-r">Medicamento</th>
+                <th class="py-2 px-4 border-r">Unidad de Medida</th>
+                <th class="py-2 px-4 border-r">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Las filas dinámicas se agregarán aquí -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Materiales e Insumos -->
+        <div class="border border-gray-300 rounded-md p-4 mb-6">
+          <h1 class="text-2xl font-bold text-blue-700 mb-4">
+            Materiales e Insumos
+          </h1>
+          <div class="flex justify-start mb-4">
+            <button
+              id="boton-nuevo-materiales"
+              onclick="mostrarModal('materiales')"
+              type="button"
+              class="fa fa-plus-circle bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-500 transition-colors duration-300"
+            >
+              Nuevo
+            </button>
+          </div>
+          <!-- Tabla de materiales -->
+          <table
+            id="tabla-materiales"
+            class="min-w-full bg-white border border-gray-200"
+          >
+            <thead>
+              <tr class="bg-gray-100 border-b">
+                <th class="py-2 px-4 border-r">#</th>
+                <th class="py-2 px-4 border-r">Material</th>
+                <th class="py-2 px-4 border-r">Cantidad</th>
+                <th class="py-2 px-4 border-r">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Las filas dinámicas se agregarán aquí -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Botón Guardar -->
+        <div
+          class="flex justify-end items-center border-t border-gray-200 pt-4 mt-4"
+        >
+          <a
+            href="{% url 'optopico' %}"
+            class="px-6 py-2 mr-4 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors duration-300"
+          >
+            Cancelar
+          </a>
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded-md shadow-md hover:bg-blue-500 transition-colors duration-300"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Modales -->
+    <p>{% include "op_topico/modal/modal_proc_especificos.html" %}</p>
+    <p>{% include "op_topico/modal/modal_medicamentos.html" %}</p>
+    <p>{% include "op_topico/modal/modal_materiales.html" %}</p>
+
+    <!-- Modal de Éxito -->
+    {% include "alerts/modal_exito.html" %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+  </body>
+</html>
+{% endblock %}

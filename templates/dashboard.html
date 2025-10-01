@@ -1,0 +1,172 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Título principal -->
+      <h1 class="dashboard-title">Dashboard</h1>
+
+      <!-- Indicadores Claves (KPIs) -->
+      <div class="kpi-container">
+        <div class="kpi-card">
+          <h3>Total Procedimientos</h3>
+          <p>{{ total_procedimientos }}</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Total Diagnósticos</h3>
+          <p>{{ total_diagnosticos }}</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Cambio Procedimientos</h3>
+          <p>{{ cambio_procedimientos }}%</p>
+        </div>
+        <div class="kpi-card">
+          <h3>Ocupación Insumos</h3>
+          <p>{{ ocupacion_insumos }}%</p>
+        </div>
+      </div>
+
+      <!-- Gráficos -->
+      <div class="charts-section">
+        <div class="chart-container">
+          <h2 class="chart-title">Procedimientos Realizados</h2>
+          <canvas id="procedimientosChart" width="600" height="400"></canvas>
+        </div>
+        <div class="chart-container">
+          <h2 class="chart-title">Diagnósticos Más Comunes</h2>
+          <canvas id="diagnosticosChart" width="600" height="400"></canvas>
+        </div>
+      </div>
+
+      <div class="charts-section">
+        <div class="chart-container">
+          <h2 class="chart-title">Materiales Más Usados</h2>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>Material</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for material in materiales_usados %}
+              <tr>
+                <td>{{ material.materiales_insumos__descripcion }}</td>
+                <td>{{ material.total_usado }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="chart-container">
+          <h2 class="chart-title">Evolución de Curaciones</h2>
+          <canvas id="curacionesChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Tablas de Alertas -->
+      <div class="chart-container">
+        <h2 class="chart-title">Stock de Materiales con Alertas</h2>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Stock Actual</th>
+              <th>Unidad</th>
+              <th>Stock Mínimo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for alerta in alertas_stock %}
+            <tr>
+              <td>{{ alerta.descripcion }}</td>
+              <td>{{ alerta.stock_actual }}</td>
+              <td>{{ alerta.unidad_medida }}</td>
+              <td>{{ alerta.stock_minimo }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="4">No hay materiales en alerta</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Configuración de Gráficos -->
+    <script>
+      // Procedimientos Realizados Chart
+      new Chart(document.getElementById('procedimientosChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Generales', 'Específicos', 'Especiales', 'Curaciones', 'Médicos'],
+          datasets: [
+            {
+              data: [
+                {{ procedimientos_realizados.Generales }},
+                {{ procedimientos_realizados.Específicos }},
+                {{ procedimientos_realizados.Especiales }},
+                {{ procedimientos_realizados.Curaciones }},
+                {{ procedimientos_realizados.Médicos }},
+              ],
+              backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f1c40f'],
+            },
+          ],
+        },
+        options: {
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top' },
+          },
+        },
+      });
+
+      // Diagnósticos más comunes Chart
+      new Chart(document.getElementById('diagnosticosChart'), {
+        type: 'pie',
+        data: {
+          labels: [
+            {% for diagnostico in diagnosticos_comunes %}"{{ diagnostico.diagnostico_medico__descripcion }}",{% endfor %}
+          ],
+          datasets: [
+            {
+              data: [
+                {% for diagnostico in diagnosticos_comunes %}{{ diagnostico.total }},{% endfor %}
+              ],
+              backgroundColor: ['#3498db', '#e74c3c', '#2ecc71', '#9b59b6', '#f1c40f'],
+            },
+          ],
+        },
+      });
+
+      // Evolución de Curaciones Chart
+      new Chart(document.getElementById('curacionesChart'), {
+        type: 'line',
+        data: {
+          labels: [
+            {% for curacion in evolucion_curaciones %}"{{ curacion.fecha }}",{% endfor %}
+          ],
+          datasets: [
+            {
+              label: 'Cantidad de Curaciones',
+              data: [
+                {% for curacion in evolucion_curaciones %}{{ curacion.total }},{% endfor %}
+              ],
+              borderColor: '#3498db',
+              fill: false,
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

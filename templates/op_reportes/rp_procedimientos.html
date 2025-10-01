@@ -1,0 +1,131 @@
+{% extends 'base.html' %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reporte de Procedimientos</title>
+</head>
+<body>
+<div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-blue-600 mb-6 text-center">Reporte de Procedimientos</h1>
+    <form method="POST" action="{% url 'rp_procedimientos' %}" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        {% csrf_token %}
+        <!-- Fecha Inicio -->
+        <div>
+            <label for="fecha_inicio" class="block text-sm font-medium text-gray-700">Fecha Inicio</label>
+            <input
+                type="date"
+                id="fecha_inicio"
+                name="fecha_inicio"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+        </div>
+        <!-- Fecha Final -->
+        <div>
+            <label for="fecha_fin" class="block text-sm font-medium text-gray-700">Fecha Final</label>
+            <input
+                type="date"
+                id="fecha_fin"
+                name="fecha_fin"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+        </div>
+        <!-- Tipo de Procedimiento -->
+        <div>
+            <label for="tipo_procedimiento" class="block text-sm font-medium text-gray-700">Tipo de Procedimiento</label>
+            <select
+                id="tipo_procedimiento"
+                name="tipo_procedimiento"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <option value="" disabled selected>-- Seleccione --</option>
+                {% for tipo in tipos_procedimientos %}
+                <option value="{{ tipo.id }}">{{ tipo.descripcion }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <!-- Responsable -->
+        <div>
+            <label for="responsable" class="block text-sm font-medium text-gray-700">Responsable</label>
+            <select
+                id="responsable"
+                name="responsable"
+                class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <option value="">-- Seleccione un responsable --</option>
+                {% for responsable in responsables %}
+                <option value="{{ responsable.id }}">{{ responsable.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+        <!-- Botones -->
+        <div class="flex items-end space-x-4">
+            <button
+                type="submit"
+                style="padding: 10px 20px; font-size: 14px; margin: 5px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;"
+            >
+                Buscar
+            </button>
+            <button
+                type="reset"
+                style="padding: 10px 20px; font-size: 14px; margin: 5px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;"
+            >
+                Limpiar
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Tabla de resultados -->
+<div class="mt-6">
+    <h2 class="text-lg font-semibold text-gray-700 mb-4">Resultados del Filtro</h2>
+    <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+        <table class="table-auto w-full border-collapse">
+            <thead class="bg-blue-600 text-white">
+                <tr>
+                    <th class="px-4 py-3 border-r border-blue-500 text-left">Fecha</th>
+                    <th class="px-4 py-3 border-r border-blue-500 text-left">Paciente</th>
+                    <th class="px-4 py-3 border-r border-blue-500 text-left">Tipo de Procedimiento</th>
+                    <th class="px-4 py-3 text-left">Responsable</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for procedimiento in procedimientos %}
+                <tr class="border-b">
+                    <td class="px-4 py-3">{{ procedimiento.fecha_registro }}</td>
+                    <td class="px-4 py-3">{{ procedimiento.paciente.HI_NOMBRE }}</td>
+                    <td class="px-4 py-3">{{ procedimiento.tipo_procedimiento }}</td>
+                    <td class="px-4 py-3">{{ procedimiento.personal }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-4 text-gray-500">
+                        No se encontraron resultados para los criterios seleccionados.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+<!-- Botones de exportación -->
+{% if procedimientos %}
+<div class="flex justify-end mt-4 space-x-4">
+    <form method="GET" action="{% url 'export_procedimientos_excel' %}" style="display: inline;">
+        <button type="submit" style="padding: 10px 20px; font-size: 14px; margin: 5px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Exportar a Excel
+        </button>
+    </form>
+    <form method="GET" action="{% url 'export_procedimientos_pdf' %}" style="display: inline;">
+        <button type="submit" style="padding: 10px 20px; font-size: 14px; margin: 5px; background-color: #dc3545; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Exportar a PDF
+        </button>
+    </form>
+</div>
+{% endif %}
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

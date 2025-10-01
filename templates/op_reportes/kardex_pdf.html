@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kardex de Material</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+            font-size: 24px;
+        }
+        p {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .details {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details span {
+            display: block;
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kardex de Material</h1>
+    <div class="details">
+        <span><strong>Material:</strong> {{ material.descripcion }}</span>
+        <span><strong>Unidad de Medida:</strong> {{ material.unidad_medida }}</span>
+    </div>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <thead>
+            <tr style="background-color: #f4f4f4; border: 1px solid #ddd;">
+                <th style="padding: 10px; border: 1px solid #ddd;">Fecha</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Tipo de Procedimiento</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Entrada</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Salida</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Saldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in registros %}
+            <tr style="{% if registro.fecha_registro == 'Saldo Inicial' %} background-color: #eaf3ff; font-weight: bold; {% endif %}">
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {{ registro.fecha_registro }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {{ registro.tipo_procedimiento }}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if registro.entrada != "--" %}
+                        {{ registro.entrada }}
+                    {% else %}
+                        --
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {% if registro.salida != "--" %}
+                        {{ registro.salida }}
+                    {% else %}
+                        --
+                    {% endif %}
+                </td>
+                <td style="padding: 10px; border: 1px solid #ddd;">
+                    {{ registro.saldo }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
