@@ -35,32 +35,29 @@ Este sistema digitaliza y optimiza el flujo de atención, permitiendo un registr
 
 ## 🛠️ Tecnologías usadas
 ![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-5.0-darkgreen?logo=django&logoColor=white)
+![Django](https://img.shields.io/badge/Django_REST_Framework-ff1709?logo=django&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38B2AC?logo=tailwindcss)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql&logoColor=white)
 
 ---
-
 ## 🖼️ Capturas del sistema
 > *Las imágenes corresponden al entorno de desarrollo.*
+<p align="center">
+  <img src="screenshots/login.png" width="45%">
+  <img src="screenshots/dashboard.png" width="45%">
+</p>
 
-### 🔐 Inicio de sesión
-<img src="screenshots/login.png" width="45%">
-
-### 📊 Dashboard
-<img src="screenshots/dashboard.png" width="45%">
-
-### 🔍 Búsqueda de paciente por DNI
-<img src="screenshots/busqueda_paciente.png" width="45%">
-
-### 🩺 Atenciones de pacientes
-<img src="screenshots/atenciones.png" width="45%">
-
-### 📄 Detalle de atención
-<img src="screenshots/detalle_atencion.png" width="45%">
-
-### 📦 Kardex de materiales
-<img src="screenshots/kardex_materiales.png" width="45%">
+<p align="center">
+  <img src="screenshots/busqueda_paciente.png" width="45%">
+  <img src="screenshots/atenciones.png" width="45%">
+</p>
+<p align="center">
+ 
+  <img src="screenshots/kardex_materiales.png" width="45%">
+</p>
+<p align="center">
+   <img src="screenshots/detalle_atencion.png" width="45%"> 
+</p>
 
 ---
 
