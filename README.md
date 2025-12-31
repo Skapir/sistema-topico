@@ -46,7 +46,7 @@ Este sistema digitaliza y optimiza el flujo de atención, permitiendo un registr
 
 ### 🔐 Inicio de sesión
 ![Login](screenshots/login.png)
-<img src="screenshots/login.png" width="60%">
+<img src="screenshots/login.png" width="30%">
 
 ### 📊 Dashboard
 ![Dashboard](screenshots/dashboard.png)
