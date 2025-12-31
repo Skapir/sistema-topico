@@ -1,29 +1,77 @@
-# 📌 Sistema Tópico – CAP III EsSalud
+# 🏥 Sistema Tópico – CAP III EsSalud
 
-**Sistema web para la gestión de pacientes y procedimientos en el área de Tópico.**  
+Sistema web para la gestión de pacientes, atenciones y procedimientos en el área de Tópico.  
 Proyecto desarrollado como parte de la **Tesis de Suficiencia Profesional**.
 
 ---
 
-## ✨ Características principales
+## 🎯 Problema que resuelve
+En el área de Tópico, los registros de atención y procedimientos se realizaban de forma manual, generando retrasos, errores en la información y dificultad para obtener reportes confiables.
 
-- 📝 Registro digital de pacientes y procedimientos.
-- 🔍 Búsqueda y actualización de datos desde **RENIEC / EsSalud**.
-- 📊 Reportes de tiempos y estadísticas de atención.
-- 👩‍⚕️ Optimización del flujo de trabajo de enfermería.
-- 🌐 Desarrollado en **Django + TailwindCSS + MySQL**.
+Este sistema digitaliza y optimiza el flujo de atención, permitiendo un registro rápido, consultas centralizadas, control de insumos y generación de reportes para la toma de decisiones.
+
+---
+
+## ✨ Características principales
+- Registro digital de pacientes y procedimientos.
+- Búsqueda de pacientes por DNI (RENIEC / EsSalud).
+- Gestión de atenciones y tipos de procedimientos.
+- Dashboard con métricas y estadísticas.
+- Control de materiales e insumos (Kardex).
+- Reportes y exportación a Excel y PDF.
+- Optimización del flujo de trabajo del personal de enfermería.
+
+---
+
+## 🧠 Mi rol en el proyecto
+- Análisis del proceso real del área de Tópico.
+- Diseño de la arquitectura del sistema.
+- Desarrollo backend y frontend del sistema.
+- Modelado de base de datos y lógica de negocio.
+- Implementación de reportes, dashboard y control de insumos.
+- Enfoque en optimización de procesos y reducción de errores.
 
 ---
 
 ## 🛠️ Tecnologías usadas
-
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)  
-![Django](https://img.shields.io/badge/Django-5.0-green?logo=django)  
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38B2AC?logo=tailwindcss)  
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-5.0-darkgreen?logo=django&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.0-38B2AC?logo=tailwindcss)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?logo=mysql&logoColor=white)
 
 ---
 
+## 🖼️ Capturas del sistema
+> *Las imágenes corresponden al entorno de desarrollo.*
+
+### 🔐 Inicio de sesión
+![Login](screenshots/login.png)
+
+### 📊 Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### 🔍 Búsqueda de paciente por DNI
+![Búsqueda de paciente](screenshots/busqueda_paciente.png)
+
+### 🩺 Atenciones de pacientes
+![Atenciones](screenshots/atenciones.png)
+
+### 📄 Detalle de atención
+![Detalle atención](screenshots/detalle_atencion.png)
+
+### 📦 Kardex de materiales
+![Kardex](screenshots/kardex_materiales.png)
+
+---
+
+## 📈 Impacto del sistema
+- Reducción de errores en el registro de atenciones.
+- Mejora en los tiempos de atención al paciente.
+- Centralización de información clínica y administrativa.
+- Control eficiente del stock de materiales.
+- Base preparada para futuras integraciones (HL7).
+
+---
 ## 🚀 Instalación y uso
 
 1. Clonar el repositorio:
@@ -70,4 +118,4 @@ Se continuará optimizando con integración HL7 y automatización de flujos.
 ## 👨‍💻 Autor
 
 **Sergio Pérez (Skapir)**  
-📧 sperezdev@gmail.com
+📧 sperezn.dev@gmail.com
