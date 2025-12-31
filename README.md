@@ -45,23 +45,22 @@ Este sistema digitaliza y optimiza el flujo de atención, permitiendo un registr
 > *Las imágenes corresponden al entorno de desarrollo.*
 
 ### 🔐 Inicio de sesión
-![Login](screenshots/login.png)
-<img src="screenshots/login.png" width="30%">
+<img src="screenshots/login.png" width="45%">
 
 ### 📊 Dashboard
-![Dashboard](screenshots/dashboard.png)
+<img src="screenshots/dashboard.png" width="45%">
 
 ### 🔍 Búsqueda de paciente por DNI
-![Búsqueda de paciente](screenshots/busqueda_paciente.png)
+<img src="screenshots/busqueda_paciente.png" width="45%">
 
 ### 🩺 Atenciones de pacientes
-![Atenciones](screenshots/atenciones.png)
+<img src="screenshots/atenciones.png" width="45%">
 
 ### 📄 Detalle de atención
-![Detalle atención](screenshots/detalle_atencion.png)
+<img src="screenshots/detalle_atencion.png" width="45%">
 
 ### 📦 Kardex de materiales
-![Kardex](screenshots/kardex_materiales.png)
+<img src="screenshots/kardex_materiales.png" width="45%">
 
 ---
 
